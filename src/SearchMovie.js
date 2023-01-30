@@ -1,34 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React , {useState, useEffect} from "react";
 import axios from "./axios";
-import "./Row.css";
-import YouTube from "react-youtube";
-import movieTrailer from "movie-trailer";
+
+
+const SEARCH_API = "https://image.tmdb.org/t/p/original/search/movie?api_key=$ed69c1589196404fb511b8cd77840fcc&query=";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl,isLargeRow }) {
+function SearchRow({ title, fetchUrl,isLargeRow }) {
   const [movies, setMovies] = useState([]);
-
+  const [term, setTerm] = useState([]);
+ 
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(fetchUrl );
+      const request = await axios.get(fetchUrl);
       setMovies(request.data.results);
-      return request;
+      return request; 
     }
     fetchData();
   }, [fetchUrl]);
 
-  const opts = {
-    height: "390",
-    width: "100%",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay:1,
-    },
+  async function handleSearch() {
+    const response = await axios.get(
+      SEARCH_API + term
+    );
+    console.log(response.data);
   }
+ 
 
+    
+
+
+ 
   return (
+    <>
+    <form onSubmit={handleSearch}>
+    <input onChange={(e) => setTerm(e.target.value)}/>
+     <button>Search</button>
+  </form>
     <div className="row">
       {<h2>{title}</h2>}
       <div className="row__posters">
@@ -43,7 +52,8 @@ function Row({ title, fetchUrl,isLargeRow }) {
       </div>
       
     </div>
+    </> 
   );
 }
 
-export default Row;
+export default SearchRow;

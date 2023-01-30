@@ -1,25 +1,23 @@
 /*resume tutorial 1:49:58*/
-import React from 'react';
-import './App.css';
-import Row from './Row';
-import requests from './requests';
-import Banner from './Banner';
-import Nav from './Nav';
+import React from "react";
+import "./App.css";
+import Row from "./Row";
+import requests from "./requests";
+import Banner from "./Banner";
+import Nav from "./Nav";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites"
+import { Route, Routes } from "react-router-dom"
+import SearchResults from "./pages/SearchResult";
 
 function App() {
   return (
-    <div className="App">
-      <Nav></Nav>
-      <Banner></Banner>
-      <Row title="NETFLIX ORGIGINALS" fetchUrl={requests.fetchNetflixOriginals}
-      isLargeRow/>
-      <Row title="Trending Now" fetchUrl={requests.fetchTrending}/>
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRated}/>
-      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies}/>
-      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies}/>
-      <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies}/>
-      <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies}/>
-      <Row title="Documentairies" fetchUrl={requests.fetchDocumantaries}/>
+    <div>
+      <Nav />
+      <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/list" element={<Favorites />} />
+      </Routes>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect , useState } from "react";
 import "./Nav.css";
+import SearchMovie from "./SearchMovie";
 
 function Nav() {
 //     const[show, handleShow] = useState(false);
@@ -16,6 +17,8 @@ function Nav() {
 
   return (
     <div className="nav">
+      <SearchMovie></SearchMovie>
+    
       <img
         className="nav__logo"
         src="https://1000merken.com/wp-content/uploads/2020/04/Netflix-Logo-700x394.jpg"
